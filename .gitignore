@@ -1,0 +1,5 @@
+.vscode
+__pycache__
+KML_Project/build
+KML_Project/dist
+KML_Project/__pycache__
