@@ -277,7 +277,7 @@ def add_MMF_location(lines, KML_file):
             KML_file.write('\t\t\t\t<Placemark>\n')
             KML_file.write('\t\t\t\t\t<name>' + l_time + '</name>\n')
             KML_file.write('\t\t\t\t\t<description>\n')
-            KML_file.write('\t\t\t\t\t\t<![CDATA[<b>AOSP Position</b><br> LogTime: ' + splitted[0] + ' ' + l_time + '<br>')
+            KML_file.write('\t\t\t\t\t\t<![CDATA[<b>MMF Position</b><br> LogTime: ' + splitted[0] + ' ' + l_time + '<br>')
             KML_file.write(' Latitude: ' + repr(latMM) + '<br> Longitude: ' + repr(lonMM))
             KML_file.write('<br> TOW: ' + repr(iTow))
             KML_file.write('<br> Is tunnel: ' + str(flags))
