@@ -23,6 +23,9 @@ def bitOperation(hpos, vpos):
     #cv2.imshow('img2_fg', img2_fg)
 
     dst = cv2.add(img1_bg, img2_fg)
+    
+    #cv2.imshow('added', dst)
+
     img1[vpos:rows+vpos, hpos:cols+hpos] = dst
     
     cv2.imshow('result', img1)
