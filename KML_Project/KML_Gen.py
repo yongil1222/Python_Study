@@ -9,6 +9,8 @@ from tkinter import filedialog
 from os import path
 import makeKML
 
+logFiles = None
+
 def getLogFiles():
     global logFiles
     fDir = path.dirname(__file__)
