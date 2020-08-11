@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['KML_Gen.py'],
-             pathex=['E:\\Python_Study\\KML_Project'],
+             pathex=['E:\\Git\\Python_Study\\KML_Project'],
              binaries=[],
              datas=[],
              hiddenimports=[],

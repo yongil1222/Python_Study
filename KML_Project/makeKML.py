@@ -182,7 +182,7 @@ def close_Track_folder(KML_file):
     KML_file.write('\n\t\t\t\t\t</coordinates>\n\t\t\t\t</LineString>\n\t\t\t</Placemark>\n')
     KML_file.write('\t\t</Folder>\n')
 
-def add_AOSP_location(lines, KML_file):
+def add_AOSP_location(lines, logFileName, KML_file):
     for line in lines:
         splitted = line.split(' ')
         if 'handleMessage(REPORT_LOCATION,' in splitted:
@@ -212,7 +212,7 @@ def add_AOSP_location(lines, KML_file):
             KML_file.write('\t\t\t\t<Placemark>\n')
             KML_file.write('\t\t\t\t\t<name>' + l_time + '</name>\n')
             KML_file.write('\t\t\t\t\t<description>\n')
-            KML_file.write('\t\t\t\t\t\t<![CDATA[<b>AOSP Position</b><br> LogTime: ' + splitted[0] + ' ' + l_time + '<br>')
+            KML_file.write('\t\t\t\t\t\t<![CDATA[<b>AOSP Position</b><br> FileName: '+ logFileName + '<br> LogTime: ' + splitted[0] + ' ' + l_time + '<br>')
             KML_file.write(' Latitude: ' + l_location[0] + '<br> Longitude: ' + l_location[1])
             if 'alt' in locals():
                 KML_file.write('<br> Altitude: ' + alt)

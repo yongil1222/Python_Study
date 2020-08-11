@@ -9,13 +9,19 @@ from tkinter import filedialog
 from os import path
 import makeKML
 
-logFiles = None
+logFileList = None
+
+def TexttoLower(text):
+    return text.lower()
 
 def getLogFiles():
-    global logFiles
+    global logFileList
     fDir = path.dirname(__file__)
     logFiles = filedialog.askopenfilenames(parent=win, initialdir=fDir)
+    logFileList = list(logFiles)
+    logFileList.sort(reverse=True)
     openFilesListbox.config(state='normal')
+    openFilesListbox.delete(1.0, tk.END)
     for logfile in logFiles:
         openFilesListbox.insert(tk.CURRENT, logfile+'\n')
     openFilesListbox.config(state='disabled')
@@ -24,7 +30,7 @@ def getLogFiles():
     saveFileEditbox.config(state='disabled')
 
 def makeKMLFile():
-    global logFiles
+    global logFileList
 
     KMLFilepath = saveFileEditbox.get()
     KMLFilename = KMLFilepath[KMLFilepath.rfind('/')+1:]
@@ -36,16 +42,17 @@ def makeKMLFile():
     makeKML.open_Position_folder(kml_file)
     if chVarAOSP.get() == 1:
         makeKML.open_AOSP_folder(kml_file)
-        for currentLogFile in logFiles:
+        for currentLogFile in logFileList:
             log_file = open(currentLogFile, 'rt', encoding='cp949', errors='ignore')
+            logFileName = currentLogFile[currentLogFile.rfind('/')+1:]
             log_lines = log_file.readlines()
-            makeKML.add_AOSP_location(log_lines, kml_file)
+            makeKML.add_AOSP_location(log_lines, logFileName, kml_file)
             log_file.close()
         makeKML.close_AOSP_folder(kml_file)
 
     if chVarMMF.get() == 1:
         makeKML.open_MMF_folder(kml_file)
-        for currentLogFile in logFiles:
+        for currentLogFile in logFileList:
             log_file = open(currentLogFile, 'rt', encoding='cp949', errors='ignore')
             log_lines = log_file.readlines()
             makeKML.add_MMF_location(log_lines, kml_file)
@@ -55,7 +62,7 @@ def makeKMLFile():
 
     if chVarTrack.get() == 1:
         makeKML.open_Track_folder(kml_file)
-        for currentLogFile in logFiles:
+        for currentLogFile in logFileList:
             log_file = open(currentLogFile, 'rt', encoding='cp949', errors='ignore')
             log_lines = log_file.readlines()
             makeKML.add_track_for_AOSP(log_lines, kml_file)
